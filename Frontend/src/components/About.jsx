@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaUsers, FaProjectDiagram, FaCrown } from "react-icons/fa";
 
 const About = () => {
   return (
@@ -37,24 +38,28 @@ const About = () => {
           <span className="text-green-400 font-semibold">
             X-mart Solutions
           </span>
-          , we specialize in creating modern web, mobile, and cloud-based
-          applications. Our team of experienced developers and designers help
-          businesses scale with secure, high-performance, and user-friendly
-          solutions that stand out.
+          , we specialize in building world-class web, mobile, and cloud-based
+          applications. Our expert developers & designers help businesses scale
+          with secure, high-performance, and visually stunning solutions.
         </motion.p>
 
         {/* Info Cards */}
         <div className="grid md:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto px-4">
           {[
             {
-              title: "10+ Years Experience",
+              icon: <FaCrown className="text-4xl text-yellow-400 mb-4" />,
+              title: "4+ Years Experience",
               desc: "Trusted by leading businesses worldwide.",
             },
             {
-              title: "50+ Successful Projects",
+              icon: (
+                <FaProjectDiagram className="text-4xl text-green-400 mb-4" />
+              ),
+              title: "5+ Successful Projects",
               desc: "From startups to enterprise-grade solutions.",
             },
             {
+              icon: <FaUsers className="text-4xl text-blue-400 mb-4" />,
               title: "Expert Team",
               desc: "Designers, Developers & Cloud Architects.",
             },
@@ -67,7 +72,8 @@ const About = () => {
               transition={{ delay: idx * 0.2, duration: 0.6 }}
               className="bg-zinc-900 p-6 rounded-xl shadow-lg hover:shadow-green-500/30 hover:scale-105 transition-all"
             >
-              <h3 className="text-xl font-semibold text-green-400 mb-2">
+              {item.icon}
+              <h3 className="text-xl font-semibold text-white mb-2">
                 {item.title}
               </h3>
               <p className="text-gray-400 text-sm">{item.desc}</p>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Navbar = () => {
@@ -15,44 +15,102 @@ const Navbar = () => {
     >
       <div className="flex justify-between items-center px-6 md:px-12 py-4">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-white hover:text-green-400 transition">
-  X-mart <span className="text-green-500">Solutions</span>
-</Link>
+        <Link
+          to="/"
+          className="text-2xl font-bold text-white hover:text-green-400 transition"
+        >
+          X-mart <span className="text-green-500">Solutions</span>
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-10 text-lg text-gray-300">
-        
           <li>
-            <a
-              href="/about"
+            <Link
+              to="/about"
               className="hover:text-green-400 transition-colors duration-300"
             >
               About
-            </a>
+            </Link>
           </li>
-          <li>
-            <a
-              href="/services"
-              className="hover:text-green-400 transition-colors duration-300"
-            >
+
+          {/* Services Dropdown */}
+          <li className="relative group">
+            <button className="flex items-center gap-1 hover:text-green-400 transition-colors duration-300">
               Services
-            </a>
+              <ChevronDown
+                size={16}
+                className="transition-transform group-hover:rotate-180"
+              />
+            </button>
+
+            {/* Dropdown Menu */}
+            <ul className="absolute left-0 top-full mt-2 w-56 bg-gray-900 text-gray-300 rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300">
+              <li>
+                <Link
+                  to="/services/app-development"
+                  className="block px-4 py-2 hover:bg-green-500 hover:text-black rounded-t-md"
+                >
+                  App Development
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services/web-development"
+                  className="block px-4 py-2 hover:bg-green-500 hover:text-black"
+                >
+                  Web Development
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services/ai-ml"
+                  className="block px-4 py-2 hover:bg-green-500 hover:text-black"
+                >
+                  AI / ML
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services/api-integration"
+                  className="block px-4 py-2 hover:bg-green-500 hover:text-black"
+                >
+                  API Integration
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services/redevelop-website"
+                  className="block px-4 py-2 hover:bg-green-500 hover:text-black"
+                >
+                  Re-develop Website
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services/domain-hosting"
+                  className="block px-4 py-2 hover:bg-green-500 hover:text-black rounded-b-md"
+                >
+                  Domain & Hosting
+                </Link>
+              </li>
+            </ul>
           </li>
+
           <li>
-            <a
-              href="/projects"
+            <Link
+              to="/projects"
               className="hover:text-green-400 transition-colors duration-300"
             >
               Work
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="hover:text-green-400 transition-colors duration-300"
             >
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
 
@@ -79,40 +137,40 @@ const Navbar = () => {
       >
         <ul className="flex flex-col items-center gap-6 py-6 text-gray-300">
           <li>
-            <a
-              href="/about"
+            <Link
+              to="/about"
               onClick={() => setIsOpen(false)}
               className="hover:text-green-400"
             >
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/services"
+            <Link
+              to="/services"
               onClick={() => setIsOpen(false)}
               className="hover:text-green-400"
             >
               Services
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/projects"
+            <Link
+              to="/projects"
               onClick={() => setIsOpen(false)}
               className="hover:text-green-400"
             >
               Work
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               onClick={() => setIsOpen(false)}
               className="hover:text-green-400"
             >
               Contact
-            </a>
+            </Link>
           </li>
           <button className="bg-green-600 px-5 py-2 rounded-full text-black font-bold hover:bg-green-500">
             Try Demo

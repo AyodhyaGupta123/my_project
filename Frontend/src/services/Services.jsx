@@ -1,27 +1,72 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaGlobe, FaMobileAlt, FaChartLine, FaPalette } from "react-icons/fa";
 
 const services = [
   {
-    icon: <FaGlobe className="text-green-500 text-4xl" />,
+    icon: (
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/1055/1055666.png"
+        alt="Web Development"
+        className="w-16 h-16"
+      />
+    ),
     title: "Web Development",
     desc: "Modern, scalable websites tailored to your goals.",
   },
   {
-    icon: <FaMobileAlt className="text-green-500 text-4xl" />,
+    icon: (
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/888/888879.png"
+        alt="Mobile Apps"
+        className="w-16 h-16"
+      />
+    ),
     title: "Mobile Apps",
     desc: "iOS & Android apps with beautiful, functional design.",
   },
   {
-    icon: <FaChartLine className="text-green-500 text-4xl" />,
-    title: "SEO & Marketing",
-    desc: "Rank higher. Get found. Grow organic traffic.",
+    icon: (
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png"
+        alt="AI ML"
+        className="w-16 h-16"
+      />
+    ),
+    title: "AI / ML",
+    desc: "Leverage AI to automate, predict and grow smarter.",
   },
   {
-    icon: <FaPalette className="text-green-500 text-4xl" />,
+    icon: (
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/1077/1077042.png"
+        alt="Branding"
+        className="w-16 h-16"
+      />
+    ),
     title: "Branding & UI/UX",
     desc: "Visually striking design that connects and converts.",
+  },
+  {
+    icon: (
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png"
+        alt="API Integration"
+        className="w-16 h-16"
+      />
+    ),
+    title: "API Integration",
+    desc: "Seamless integrations with third-party services & APIs.",
+  },
+  {
+    icon: (
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/1076/1076928.png"
+        alt="Hosting"
+        className="w-16 h-16"
+      />
+    ),
+    title: "Domain & Hosting",
+    desc: "Fast & secure hosting solutions with full domain support.",
   },
 ];
 
@@ -61,7 +106,7 @@ const Services = () => {
         </motion.p>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 md:px-10 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 px-6 md:px-10 max-w-7xl mx-auto">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -69,15 +114,19 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false }}
               transition={{ delay: index * 0.2, duration: 0.6 }}
-              className="group relative bg-zinc-900 p-8 rounded-xl shadow-lg hover:shadow-green-500/40 hover:scale-105 transition-all cursor-pointer overflow-hidden"
+              className="group relative rounded-xl shadow-lg overflow-hidden 
+              bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700
+              hover:border-green-500 hover:shadow-green-400/40 hover:scale-105 transition-all duration-300"
             >
-              {/* Hover glow overlay */}
-              <div className="absolute inset-0 bg-green-500/5 opacity-0 group-hover:opacity-100 transition-all"></div>
+              {/* Gradient overlay animation */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-green-500/20 via-transparent to-green-400/20 animate-pulse"></div>
 
-              <div className="relative z-10 flex flex-col items-center text-center">
+              <div className="relative z-10 flex flex-col items-center text-center p-8">
                 <div className="mb-4">{service.icon}</div>
-                <h3 className="text-xl font-semibold text-white mb-2">{service.title}</h3>
-                <p className="text-gray-400 text-sm">{service.desc}</p>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-gray-300 text-sm">{service.desc}</p>
               </div>
             </motion.div>
           ))}

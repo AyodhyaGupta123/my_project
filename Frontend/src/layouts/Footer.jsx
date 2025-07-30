@@ -41,7 +41,7 @@ const Footer = () => {
               <FaTwitter />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/"
               className="p-2 rounded-full transition"
               style={{
                 background:
@@ -53,7 +53,7 @@ const Footer = () => {
               <FaInstagram />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/ayodhya-gupta-8b5b9028a"
               className="p-2 rounded-full transition"
               style={{ backgroundColor: "#0A66C2", color: "white" }}
               aria-label="LinkedIn"
@@ -61,7 +61,7 @@ const Footer = () => {
               <FaLinkedinIn />
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/AyodhyaGupta123"
               className="p-2 rounded-full transition"
               style={{ backgroundColor: "#24292e", color: "white" }}
               aria-label="GitHub"
