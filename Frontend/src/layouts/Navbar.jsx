@@ -1,147 +1,125 @@
 import React, { useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null); // Track which dropdown is open
-
-  const menuLinks = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About" },
-    {
-      label: "Services",
-      dropdown: [
-        { path: "/services/web", label: "Web Development" },
-        { path: "/services/mobile", label: "Mobile App Development" },
-        { path: "/services/cloud", label: "Cloud Solutions" },
-      ],
-    },
-    { path: "/contact", label: "Contact" },
-  ];
 
   return (
-    <nav className="bg-white shadow-lg fixed top-0 left-0 w-full z-50">
-      <div className="container mx-auto px-6 flex justify-between items-center h-16">
+    <motion.nav
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="fixed top-0 left-0 w-full bg-black/90 backdrop-blur-md border-b border-green-600 shadow-lg z-50"
+    >
+      <div className="flex justify-between items-center px-6 md:px-12 py-4">
         {/* Logo */}
-        <NavLink to="/" className="text-2xl font-bold text-blue-700">
-          X-mart Solutions
-        </NavLink>
+        <Link to="/" className="text-2xl font-bold text-white hover:text-green-400 transition">
+  X-mart <span className="text-green-500">Solutions</span>
+</Link>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-8 text-gray-700 font-medium relative">
-          {menuLinks.map((link, idx) =>
-            link.dropdown ? (
-              <li
-                key={idx}
-                className="relative group"
-                onMouseEnter={() => setOpenDropdown(idx)}
-                onMouseLeave={() => setOpenDropdown(null)}
-              >
-                <span className="flex items-center cursor-pointer hover:text-blue-700">
-                  {link.label} <ChevronDown size={16} className="ml-1" />
-                </span>
-
-                {/* Dropdown Menu */}
-                {openDropdown === idx && (
-                  <ul className="absolute top-10 left-0 bg-white shadow-lg rounded-lg w-52 py-2">
-                    {link.dropdown.map((dropItem, dropIdx) => (
-                      <li key={dropIdx}>
-                        <NavLink
-                          to={dropItem.path}
-                          className={({ isActive }) =>
-                            `block px-4 py-2 hover:bg-blue-100 ${
-                              isActive ? "text-blue-700 font-semibold" : ""
-                            }`
-                          }
-                        >
-                          {dropItem.label}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ) : (
-              <li key={idx}>
-                <NavLink
-                  to={link.path}
-                  className={({ isActive }) =>
-                    `hover:text-blue-700 ${
-                      isActive ? "text-blue-700 font-semibold" : ""
-                    }`
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              </li>
-            )
-          )}
+        <ul className="hidden md:flex space-x-10 text-lg text-gray-300">
+        
+          <li>
+            <a
+              href="/about"
+              className="hover:text-green-400 transition-colors duration-300"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="/services"
+              className="hover:text-green-400 transition-colors duration-300"
+            >
+              Services
+            </a>
+          </li>
+          <li>
+            <a
+              href="/projects"
+              className="hover:text-green-400 transition-colors duration-300"
+            >
+              Work
+            </a>
+          </li>
+          <li>
+            <a
+              href="/contact"
+              className="hover:text-green-400 transition-colors duration-300"
+            >
+              Contact
+            </a>
+          </li>
         </ul>
 
-        {/* Mobile Toggle */}
+        {/* CTA Button */}
+        <button className="hidden md:inline-block bg-green-600 px-5 py-2 rounded-full text-black font-bold hover:bg-green-500 transition-transform hover:scale-105">
+          Try Demo
+        </button>
+
+        {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden text-gray-700"
+          className="md:hidden text-white"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`md:hidden bg-white shadow-md transition-all duration-300 ${
-          isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"
-        }`}
+      <motion.div
+        initial={{ height: 0, opacity: 0 }}
+        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.4 }}
+        className="md:hidden bg-black/95 backdrop-blur-lg overflow-hidden"
       >
-        <ul className="flex flex-col items-center gap-6 py-6 text-gray-700 font-medium">
-          {menuLinks.map((link, idx) =>
-            link.dropdown ? (
-              <li key={idx} className="w-full text-center">
-                <button
-                  onClick={() =>
-                    setOpenDropdown(openDropdown === idx ? null : idx)
-                  }
-                  className="w-full flex justify-center items-center gap-1 hover:text-blue-700"
-                >
-                  {link.label} <ChevronDown size={16} />
-                </button>
-
-                {openDropdown === idx && (
-                  <ul className="bg-gray-50 rounded-md mt-2 w-full">
-                    {link.dropdown.map((dropItem, dropIdx) => (
-                      <li key={dropIdx}>
-                        <NavLink
-                          to={dropItem.path}
-                          className="block px-4 py-2 hover:bg-blue-100"
-                          onClick={() => {
-                            setIsOpen(false);
-                            setOpenDropdown(null);
-                          }}
-                        >
-                          {dropItem.label}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ) : (
-              <li key={idx}>
-                <NavLink
-                  to={link.path}
-                  className="hover:text-blue-700"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </NavLink>
-              </li>
-            )
-          )}
+        <ul className="flex flex-col items-center gap-6 py-6 text-gray-300">
+          <li>
+            <a
+              href="/about"
+              onClick={() => setIsOpen(false)}
+              className="hover:text-green-400"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              href="/services"
+              onClick={() => setIsOpen(false)}
+              className="hover:text-green-400"
+            >
+              Services
+            </a>
+          </li>
+          <li>
+            <a
+              href="/projects"
+              onClick={() => setIsOpen(false)}
+              className="hover:text-green-400"
+            >
+              Work
+            </a>
+          </li>
+          <li>
+            <a
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className="hover:text-green-400"
+            >
+              Contact
+            </a>
+          </li>
+          <button className="bg-green-600 px-5 py-2 rounded-full text-black font-bold hover:bg-green-500">
+            Try Demo
+          </button>
         </ul>
-      </div>
-    </nav>
+      </motion.div>
+    </motion.nav>
   );
 };
 
